@@ -1,8 +1,9 @@
 .list-item {
     border: 1px solid black;
+    width: 70%;
+    list-style: none;
 }
 
-/*#container {
-    width: auto;
-    border: 1px solid red;
-}*/
+#container {
+    width: 30%;
+}
