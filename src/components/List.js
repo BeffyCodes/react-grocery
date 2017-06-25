@@ -56,11 +56,9 @@ class List extends React.Component {
       />
     )
     return (
-      <div>
-        <ul>
+        <ul id="groceryList">
           {listItems}
         </ul>
-      </div>
     );
   }
 }

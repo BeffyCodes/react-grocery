@@ -10,7 +10,7 @@ class Container extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div id="container">
         Item Name: <input ref={(inputEl) => this.itemNameInput = inputEl} type="text" /> <button onClick={this.addItemHandler}>Add Item</button>
         <List ref={(listObj) => this.list = listObj}/>
       </div>

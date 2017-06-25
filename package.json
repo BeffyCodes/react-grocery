@@ -1,8 +1,8 @@
 {
-  "name": "react-starter-project",
+  "name": "react-grocery",
   "version": "1.0.0",
   "description": "My Project",
-  "main": "index.js",
+  "main": "./src/main.js",
   "scripts": {
     "compile": "webpack",
     "start": "node server.js",
