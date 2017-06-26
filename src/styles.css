@@ -31,3 +31,11 @@ li.completed {
 li.completed > button {
     display: none;
 }
+
+li.edit-state > button.edit-button {
+    display: none;
+}
+
+li:not(.edit-state) > button.save-button {
+    display: none;
+}

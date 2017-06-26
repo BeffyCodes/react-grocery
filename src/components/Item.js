@@ -1,6 +1,6 @@
 import React from 'react';
 import ActionButton from './ActionButton'
-import ButtonTypes from "../logic/buttonTypes"
+import ButtonTypes from "../utils/buttonTypes"
 
 /**
  * The line item for a grocery item
@@ -9,43 +9,65 @@ class Item extends React.Component {
     constructor() {
         super();
         this.state = {
-            completed: false
+            completed: false,
+            inEditState: false
         }
     }
-    // TODO: move this up to the List level. There's no reason for the Item to do the routing on which button was pushed.
-    // It should just check what was clicked, if it was a button, bubble it up, if it was itself, it's selected
-    handleClick(buttonType) {
-        if (buttonType === ButtonTypes.DELETE) {
-            // call parent's remove handler
-            this.props.removeHandler(this.props.id);
-        } else if (buttonType === ButtonTypes.COMPLETED) {
-            // set this.completed to true, add completed class
-            this.setState({
-                completed: true
-            });
-        } else {
-            // no button was pushed, item was selected
-            console.log("lol");
-        }
+
+    propogateDelete() {
+        // call list's remove handler
+        this.props.removeHandler(this.props.id);
+    }
+
+    completeItem() {
+        // set this.completed to true, add completed class
+        this.setState({
+            completed: true
+        });
+    }
+
+    editItem() {
+        console.log("edit");
+    }
+
+    saveItem() {
+        console.log("save");
+    }
+
+    selectItem() {
+        console.log("item selected");
     }
 
     render() {
         let className = "list-item";
+        const inEditState = this.state.inEditState;
 
         if (this.state.completed) {
             className += " completed";
         }
 
+        if (inEditState) {
+            className = + " edit-state";
+        }
+
         return (
-            <li className={className}>
+            <li className={className} onClick={() => this.selectItem()}>
                 {this.props.name}
+                <ActionButton className={"edit-button"}
+                    buttonType={ButtonTypes.EDIT}
+                    buttonClickedHandler={() => this.editItem()}
+                />
+                <ActionButton className={"save-button"}
+                    buttonType={ButtonTypes.SAVE}
+                    buttonClickedHandler={() => this.saveItem()}
+                />
                 <ActionButton className={"complete-button"}
                     buttonType={ButtonTypes.COMPLETED}
-                    buttonClickedHandler={(buttonType) => this.handleClick(buttonType)}
+                    buttonClickedHandler={() => this.completeItem()}
                 />
                 <ActionButton className={"delete-button"}
                     buttonType={ButtonTypes.DELETE}
-                    buttonClickedHandler={(buttonType) => this.handleClick(buttonType)}
+                    buttonClickedHandler={() => this.propogateDelete()}
                 />
             </li>
         );
