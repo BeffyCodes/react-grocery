@@ -8,40 +8,35 @@ class List extends React.Component {
   constructor() {
     super();
     this.state = {
-      //items: []
-      items: [
-        {
-          name: "Item 1",
-          num: 4
-        },
-        {
-          name: "Item 2",
-          num: 1
-        },
-        {
-          name: "Item 3",
-          num: 3
-        },
-        {
-          name: "Item 4",
-          num: 2
-        }
-      ],
+      items: [],
+      todoCounter: 0
     };
   }
 
   removeItem(id) {
+    const items = this.state.items.slice();
 
-  }
-
-  addItem(newItemName, newItemNum) {
-    const items = this.state.items.concat({
-      name: newItemName,
-      num: newItemNum
+    let filteredArray = items.filter(function (item, index) {
+      return id != item.id;
     });
 
     this.setState({
-      items: items
+      items: filteredArray
+    });
+  }
+
+  addItem(newItemName, newItemNum) {
+    let counter = this.state.todoCounter;
+    const items = this.state.items.concat({
+      id: counter++,
+      name: newItemName,
+      num: 1,
+      completed: false
+    });
+
+    this.setState({
+      items: items,
+      todoCounter: counter
     });
   }
 
@@ -49,16 +44,18 @@ class List extends React.Component {
     let idCounter = 0;
     const items = this.state.items;
     const listItems = items.map((item) =>
-      <Item key={idCounter++}
+      <Item key={item.id}
+        id={item.id}
         name={item.name}
         num={item.num}
-        removeHandler={this.removeItem}
+        removeHandler={(id) => this.removeItem(id)}
+        completed={item.completed}
       />
     )
     return (
-        <ul id="groceryList">
-          {listItems}
-        </ul>
+      <ul id="groceryList">
+        {listItems}
+      </ul>
     );
   }
 }
