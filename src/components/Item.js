@@ -6,11 +6,12 @@ import ButtonTypes from "../utils/buttonTypes"
  * The line item for a grocery item
  */
 class Item extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             completed: false,
-            inEditState: false
+            inEditState: false,
+            name: this.props.name
         }
     }
 
@@ -27,11 +28,18 @@ class Item extends React.Component {
     }
 
     editItem() {
-        console.log("edit");
+        this.setState({
+            inEditState: true
+        });
     }
 
     saveItem() {
-        console.log("save");
+        if (this.editBox.value && this.editBox.value.trim()) {
+            this.setState({
+                inEditState: false,
+                name: this.editBox.value.trim()
+            });
+        }
     }
 
     selectItem() {
@@ -47,12 +55,12 @@ class Item extends React.Component {
         }
 
         if (inEditState) {
-            className = + " edit-state";
+            className += " edit-state";
         }
 
         return (
             <li className={className} onClick={() => this.selectItem()}>
-                {this.props.name}
+                {inEditState ? <input ref={(editBox) => this.editBox = editBox} type="text" defaultValue={this.state.name} /> : this.state.name}
                 <ActionButton className={"edit-button"}
                     buttonType={ButtonTypes.EDIT}
                     buttonClickedHandler={() => this.editItem()}
@@ -61,14 +69,16 @@ class Item extends React.Component {
                     buttonType={ButtonTypes.SAVE}
                     buttonClickedHandler={() => this.saveItem()}
                 />
-                <ActionButton className={"complete-button"}
-                    buttonType={ButtonTypes.COMPLETED}
-                    buttonClickedHandler={() => this.completeItem()}
-                />
-                <ActionButton className={"delete-button"}
-                    buttonType={ButtonTypes.DELETE}
-                    buttonClickedHandler={() => this.propogateDelete()}
-                />
+                <div className={"button-panel"}>
+                    <ActionButton className={"complete-button"}
+                        buttonType={ButtonTypes.COMPLETED}
+                        buttonClickedHandler={() => this.completeItem()}
+                    />
+                    <ActionButton className={"delete-button"}
+                        buttonType={ButtonTypes.DELETE}
+                        buttonClickedHandler={() => this.propogateDelete()}
+                    />
+                </div>
             </li>
         );
     }

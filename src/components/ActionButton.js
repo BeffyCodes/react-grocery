@@ -1,6 +1,8 @@
 import React from 'react';
 import MdDone from 'react-icons/lib/md/done';
 import MdDelete from 'react-icons/lib/md/delete';
+import MdModeEdit from 'react-icons/lib/md/mode-edit';
+import FaCheckCircle from 'react-icons/lib/fa/check-circle';
 import ButtonTypes from "../utils/buttonTypes";
 
 /**
@@ -13,10 +15,28 @@ class ActionButton extends React.Component {
   }
 
   render() {
+    // Determine icon by button type
+    let icon = null;
+
+    switch (this.props.buttonType) {
+      case ButtonTypes.COMPLETED:
+        icon = <MdDone />;
+        break;
+      case ButtonTypes.DELETE:
+        icon = <MdDelete />;
+        break;
+      case ButtonTypes.EDIT:
+        icon = <MdModeEdit />;
+        break;
+      case ButtonTypes.SAVE:
+        icon = <FaCheckCircle />;
+        break;
+    }
+
     return (
       <button className={this.props.className}
         onClick={(event) => this.handleClick(event)}>
-        {this.props.buttonType === ButtonTypes.COMPLETED ? <MdDone /> : <MdDelete />}
+        {icon}
       </button>
     );
   }
