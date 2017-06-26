@@ -1,25 +1,42 @@
 li.list-item {
-    width: 70%;
+    position: relative;
     list-style: none;
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
 }
 
 #container {
-    width: 30%;
+    width: 20%;
 }
 
-li.list-item > button {
-    padding-left: 10px;
+#container > button {
+    float: right;
+}
+
+#grocery-list {
+    padding: 0;
+}
+
+li.list-item > button, div.button-panel > button {
     background:none;
     border:none;
     cursor: pointer;
 }
 
-li.list-item > button.complete-button {
+button.complete-button {
     color: green;
+    padding-left: 15px;
 }
 
-li.list-item > button.delete-button {
+button.delete-button {
     color: red;
+    padding-left: 10px;
+}
+
+button.edit-button {
+    color: blue;
+    padding-left: 10px;
 }
 
 li.completed {
@@ -28,14 +45,16 @@ li.completed {
     border: 1px solid black;
 }
 
-li.completed > button {
-    display: none;
+div.button-panel {
+    display: inline;
+    position: absolute;
+    right: 0;
 }
 
-li.edit-state > button.edit-button {
-    display: none;
-}
-
+li.completed > button, 
+li.edit-state > button.edit-button,
+li.edit-state > button.delete-button,
+li.edit-state > button.complete-button,
 li:not(.edit-state) > button.save-button {
     display: none;
 }
