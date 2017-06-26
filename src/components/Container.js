@@ -6,11 +6,10 @@ import List from './List';
  */
 class Container extends React.Component {
   addItemHandler() {
-    if (!this.itemNameInput.value) {
-      return;
+    if (this.itemNameInput.value && this.itemNameInput.value.trim()) {
+      this.list.addItem(this.itemNameInput.value);
     }
-    
-    this.list.addItem(this.itemNameInput.value);
+
     this.itemNameInput.value = "";
   }
 
