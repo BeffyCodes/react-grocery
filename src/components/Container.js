@@ -8,7 +8,6 @@ class Container extends React.Component {
   constructor() {
     super();
     
-
     this.addItemHandler = this.addItemHandler.bind(this);
     this.shouldSubmit = this.shouldSubmit.bind(this);
   }
