@@ -54,8 +54,7 @@ div.button-panel {
 li.completed > button,
 li.completed > .button-panel,
 li.edit-state > button.edit-button,
-li.edit-state > button.delete-button,
-li.edit-state > button.complete-button,
+li.edit-state > .button-panel,
 li:not(.edit-state) > button.save-button {
     display: none;
 }
