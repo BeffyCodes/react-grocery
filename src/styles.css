@@ -51,7 +51,8 @@ div.button-panel {
     right: 0;
 }
 
-li.completed > button, 
+li.completed > button,
+li.completed > .button-panel,
 li.edit-state > button.edit-button,
 li.edit-state > button.delete-button,
 li.edit-state > button.complete-button,
