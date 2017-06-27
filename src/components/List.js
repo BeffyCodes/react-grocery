@@ -1,5 +1,6 @@
 import React from 'react';
-import Item from './Item'
+import Item from './Item';
+import PropTypes from 'prop-types';
 
 /**
  * The list containing the grocery Items
@@ -11,6 +12,8 @@ class List extends React.Component {
       items: [],
       todoCounter: 0
     };
+
+    this.removeItem = this.removeItem.bind(this);
   }
 
   removeItem(id) {
@@ -48,7 +51,7 @@ class List extends React.Component {
         id={item.id}
         name={item.name}
         num={item.num}
-        removeHandler={(id) => this.removeItem(id)}
+        removeHandler={this.removeItem}
         completed={item.completed}
       />
     )

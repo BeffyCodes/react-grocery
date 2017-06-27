@@ -4,6 +4,7 @@ import MdDelete from 'react-icons/lib/md/delete';
 import MdModeEdit from 'react-icons/lib/md/mode-edit';
 import FaCheckCircle from 'react-icons/lib/fa/check-circle';
 import ButtonTypes from "../utils/buttonTypes";
+import PropTypes from 'prop-types';
 
 /**
  * A button that sets off an action
@@ -43,8 +44,8 @@ class ActionButton extends React.Component {
 }
 
 ActionButton.propTypes = {
-  buttonType: React.PropTypes.number,
-  buttonClickedHandler: React.PropTypes.func
+  buttonType: PropTypes.number,
+  buttonClickedHandler: PropTypes.func
 }
 
 export default ActionButton;

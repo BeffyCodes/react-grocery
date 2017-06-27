@@ -1,6 +1,7 @@
 import React from 'react';
-import ActionButton from './ActionButton'
-import ButtonTypes from "../utils/buttonTypes"
+import ActionButton from './ActionButton';
+import ButtonTypes from "../utils/buttonTypes";
+import PropTypes from 'prop-types';
 
 /**
  * The line item for a grocery item
@@ -12,6 +13,18 @@ class Item extends React.Component {
             completed: false,
             inEditState: false,
             name: this.props.name
+        };
+
+        // Bind functions
+        this.propogateDelete = this.propogateDelete.bind(this);
+        this.completeItem = this.completeItem.bind(this);
+        this.editItem = this.editItem.bind(this);
+        this.saveItem = this.saveItem.bind(this);
+    }
+
+    componentDidUpdate() {
+        if (this.state.inEditState) {
+            this.editBox.select();
         }
     }
 
@@ -63,20 +76,20 @@ class Item extends React.Component {
                 {inEditState ? <input ref={(editBox) => this.editBox = editBox} type="text" defaultValue={this.state.name} /> : this.state.name}
                 <ActionButton className={"edit-button"}
                     buttonType={ButtonTypes.EDIT}
-                    buttonClickedHandler={() => this.editItem()}
+                    buttonClickedHandler={this.editItem}
                 />
                 <ActionButton className={"save-button"}
                     buttonType={ButtonTypes.SAVE}
-                    buttonClickedHandler={() => this.saveItem()}
+                    buttonClickedHandler={this.saveItem}
                 />
                 <div className={"button-panel"}>
                     <ActionButton className={"complete-button"}
                         buttonType={ButtonTypes.COMPLETED}
-                        buttonClickedHandler={() => this.completeItem()}
+                        buttonClickedHandler={this.completeItem}
                     />
                     <ActionButton className={"delete-button"}
                         buttonType={ButtonTypes.DELETE}
-                        buttonClickedHandler={() => this.propogateDelete()}
+                        buttonClickedHandler={this.propogateDelete}
                     />
                 </div>
             </li>
@@ -85,10 +98,10 @@ class Item extends React.Component {
 }
 
 Item.propTypes = {
-    id: React.PropTypes.number,
-    name: React.PropTypes.string,
-    num: React.PropTypes.number,
-    removeHandler: React.PropTypes.func
+    id: PropTypes.number,
+    name: PropTypes.string,
+    num: PropTypes.number,
+    removeHandler: PropTypes.func
 }
 
 export default Item;
